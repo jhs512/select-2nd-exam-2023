@@ -1,0 +1,39 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<select id="cate-1"></select>
+
+<select id="cate-2"></select>
+
+<script th:inline="javascript">
+    const data = /*[[${data}]]*/ null;
+
+    $('#cate-1').empty();
+
+    for (const no in data) {
+        $('#cate-1').append(
+            "<option value='" + no + "'>" + data[no].name + "</option>"
+        );
+    }
+
+    const cate1Val = $('#cate-1').val();
+
+    $('#cate-2').empty();
+
+    for (const no in data[cate1Val].sub) {
+        $('#cate-2').append(
+            "<option value='" + no + "'>" + data[cate1Val].sub[no].name + "</option>"
+        );
+    }
+
+    $('#cate-1').change(function () {
+        const cate1Val = $('#cate-1').val();
+
+        $('#cate-2').empty();
+
+        for (const no in data[cate1Val].sub) {
+            $('#cate-2').append(
+                "<option value='" + no + "'>" + data[cate1Val].sub[no].name + "</option>"
+            );
+        }
+    });
+</script>
